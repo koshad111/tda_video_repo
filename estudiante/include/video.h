@@ -93,20 +93,22 @@ public:
 
     /**
     *@brief Leer un video
-    *
+    *@param directory_path ruta al directorio de imagenes de video
     *@post Leer un video de disco
     *@pre en el directorio path debe almacenarse una secuencia temporal de fotogramas.
     *@post Devuelve true si la lectura tiene éxito y false en caso contrario
     */
-    bool LeerVideo(const string & path);
+    bool LeerVideo(const string & directory_path);
 
     /**
     *@brief Escribir un video
+    *@param directory_path ruta al directorio de imagenes de video
+    *@param prefijo nombre de las imagenes, que va a guardarse enumerado segun su orden en video
     *@post Escribe un video de disco
     *@pre En el directorio path se almacenará la secuencia temporal de fotogramas. Los fotogramas tomarán como nombre <prefijo>_01.pgm .. <prefijo>_0n.pgm siendo n el numero de fotogramas.
     *post Devuelve true si la escritura tiene éxito y false en caso contrario
     */
-    bool EscribirVideo(const string & path, const string &prefijo) const;
+    bool EscribirVideo(const string & directory_path, const string &prefijo) const;
 
 
 
