@@ -57,6 +57,7 @@ public:
 
     /**
     *@brief Consultar/Asignar una imagen al video.
+    *@param foto Index del imagen
     *@post A través del operador [] el usuario puede consultar un fotograma del video.
     *@pre 0<=n<=size().
     *@return Devuelve la imagen asociada al fotograma foto-ésimo del video.
@@ -65,6 +66,7 @@ public:
 
     /**
     *@brief A través del operador [] el usuario puede consultar un fotograma del video.
+    *@param foto Index del imagen
     *@pre 0<=n<=size().
     *@return Devuelve la imagen asociada al fotograma foto-ésimo del video.
     */
@@ -72,6 +74,8 @@ public:
 
     /**
     *@brief Insertar un nuevo fotograma.
+    *@param k index, donde va a insertar la imagen
+    *@param I la imagen
     *@post Inserta un nuevo fotograma I en la posición k.
     *@pre k debe indicar una posición válida dentro del video, es decir, en el rango [0,V.size()].
     *@post El video es modificado teniendo un nuevo fotograma más.
@@ -80,6 +84,7 @@ public:
 
     /**
     *@brief Borrar un fotograma
+    *@param k index, donde va a borrar una imagen
     *@post Eliminar el fotograma de la posicion dada por un entero k
     *@pre k debe ser una posición válida dentro del vídeo, es decir, que pertenezca al rango [0,V.size()-1].
     *@post El video es modificado teniendo un fotograma menos
@@ -88,6 +93,7 @@ public:
 
     /**
     *@brief Leer un video
+    *
     *@post Leer un video de disco
     *@pre en el directorio path debe almacenarse una secuencia temporal de fotogramas.
     *@post Devuelve true si la lectura tiene éxito y false en caso contrario
