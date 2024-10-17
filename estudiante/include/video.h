@@ -124,8 +124,23 @@ public:
     */
     bool EscribirVideo(const string & directory_path, const string &prefijo) const;
 
+    /**
+    *@brief a partir de un vídeo, obtenga el vídeo invertido
+    *@param video un vídeo constante
+    *@post devolverá un nuevo vídeo que será el vídeo invertido.
+    *@pre Esto quiere decir que el fotograma v.size()-1 se podrá en la posición 0 del video rebobinado,
+    *el v.size()-2 en la posición 1, y así hasta llegar al fotograma 0 que se colocará en la posición v.size()-1.
+    */
     void Rebobinar(const Video &video);
 
+    /**
+     * @brief  cambia una imagen en otra
+     * @param I1 image de inicio
+     * @param I2 image de fin
+     * @param nf numero de imagenes
+     * *@post El morphing se usa para cambiar una imagen en otra o para proporcionar una transición suave
+     * de una imagen a otra creando la ilusión de una transformación.
+     */
     void Morphing(const Image &I1, const Image &I2, int nf);
 };
 

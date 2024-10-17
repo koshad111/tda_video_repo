@@ -7,15 +7,21 @@ set(BASE_FOLDER estudiante)
 include_directories(${BASE_FOLDER}/include)
 #add_library(imageio ${BASE_FOLDER}/src/imageio.cpp)
 #add_library(image ${BASE_FOLDER}/src/image.cpp ${BASE_FOLDER}/src/imageop.cpp ${BASE_FOLDER}/src/imageIO.cpp)
-add_library(video ${BASE_FOLDER}/src/video.cpp ${BASE_FOLDER}/src/image.cpp ${BASE_FOLDER}/src/imageop.cpp ${BASE_FOLDER}/src/imageIO.cpp)
+add_library(video ${BASE_FOLDER}/src/video.cpp ${BASE_FOLDER}/src/image.cpp ${BASE_FOLDER}/src/imageop.cpp ${BASE_FOLDER}/src/imageIO.cpp
+        estudiante/include/video.h
+        estudiante/include/video.h)
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/rebobinar.cpp)
-    add_executable(rebobinar ${BASE_FOLDER}/src/rebobinar.cpp)
+    add_executable(rebobinar ${BASE_FOLDER}/src/rebobinar.cpp
+            estudiante/include/video.h
+            estudiante/include/video.h)
     target_link_libraries(rebobinar LINK_PUBLIC video)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/morphing.cpp)
-    add_executable(morphing ${BASE_FOLDER}/src/morphing.cpp)
+    add_executable(morphing ${BASE_FOLDER}/src/morphing.cpp
+            estudiante/include/video.h
+            estudiante/include/video.h)
     target_link_libraries(morphing LINK_PUBLIC video)
 endif()
 
