@@ -7,10 +7,24 @@
 using namespace std;
 
 class Video
-{
+{ /**
+     @page repVideo Representación del TDA Video.
+
+     @section invVideo Invariante de la representación.
+
+     Un objeto válido 1 del TDA Video debe cumplir
+     -V.seq es un contenedor de la STL (vector) que almacena imagenes.
+
+     @section faVideo Función de abstraccion
+
+     Un objeto válido 1 del TDA Video representa una secuencia de imagenes.
+
+     **/
+
+
 private:
     /**
-      @brief Vector que almacena imagenes
+      @brief Vector de la STL que almacena imagenes. Almacena tantas imagenes como fotogramas tenga el video
     **/
     vector<Image> seq;
 
@@ -74,20 +88,20 @@ public:
 
     /**
     *@brief Insertar un nuevo fotograma.
-    *@param k index, donde va a insertar la imagen
-    *@param I la imagen
+    *@param k es la posicion donde se quiere insertar la imagen dentro del video
+    *@param I es  la imagen que se quiere insertar
     *@post Inserta un nuevo fotograma I en la posición k.
     *@pre k debe indicar una posición válida dentro del video, es decir, en el rango [0,V.size()].
-    *@post El video es modificado teniendo un nuevo fotograma más.
+    *@post El video es modificado. Se inserta la nueva imagen en la posicion k y el vector se rehace añadiendo un espacio más y las imagenes siguientes se desplazan 1 unidad a la derecha
     */
     void Insertar(int k, const Image&I);
 
     /**
     *@brief Borrar un fotograma
-    *@param k index, donde va a borrar una imagen
+    *@param k es la posicion del video a eliminar
     *@post Eliminar el fotograma de la posicion dada por un entero k
     *@pre k debe ser una posición válida dentro del vídeo, es decir, que pertenezca al rango [0,V.size()-1].
-    *@post El video es modificado teniendo un fotograma menos
+    *@post El video es modificado teniendo un fotograma menos, el vector elimina esa posicion y las imagenes siguientes quedan unidas al elemento anterior del borrado
     */
     void Borrar(int k);
 
@@ -110,9 +124,9 @@ public:
     */
     bool EscribirVideo(const string & directory_path, const string &prefijo) const;
 
+    void Rebobinar(const Video &video);
 
-
-
+    void Morphing(const Image &I1, const Image &I2, int nf);
 };
 
 

@@ -13,7 +13,6 @@
 using namespace std;
 
 Video::Video(){
-    seq.reserve(0);
 }
 
 Video::Video(const Video & J)
@@ -50,7 +49,7 @@ const Image & Video::operator[](int foto) const
 
 void Video::Insertar(int k, const Image&I)
 {
-    assert(k>=0 && k<seq.size()); //SE PUEDE EN SEQ.SIZE?? no
+    assert(k>=0 && k<=seq.size()); //SE PUEDE EN SEQ.SIZE?? no
     seq.insert(seq.begin()+k, I);
 }
 
@@ -91,13 +90,13 @@ void readDirectory(const std::string& name, vector<string>& v)
 
 //maybe add to video load results
 
-bool Video::LeerVideo(const string &directory_path){
+bool Video::LeerVideo(const string &path){
 
     vector<Image> images;
     vector<string> img_file_names;
 
     //lee directorio y aniade nombres de las imagenes al img_file_names
-    readDirectory(directory_path, img_file_names);
+    readDirectory(path, img_file_names);
 
     //si no hay nada en img_file_names, LeerVideo devuelve false
     if (img_file_names.empty()) {
@@ -110,7 +109,7 @@ bool Video::LeerVideo(const string &directory_path){
 
     //lee imagenes via constructor de Image con ruta a imagen como parametro
     for (const auto & img_file_name : img_file_names){
-        string path_to_image = directory_path + "/" + img_file_name;
+        string path_to_image = path + "/" + img_file_name;
         const char* to_image = path_to_image.c_str();
         Image img = Image(to_image); //el constructor comprueba si el fichero es "correcto" o no
         images.push_back(img);
@@ -128,7 +127,7 @@ bool Video::LeerVideo(const string &directory_path){
     return true;
 }
 
-bool Video::EscribirVideo(const string & directory_path, const string &prefijo)const{
+bool Video::EscribirVideo(const string & path, const string &prefijo)const{
 
     //comprueba si seq esta vacio
     if (this->seq.size() == 0){
@@ -136,22 +135,21 @@ bool Video::EscribirVideo(const string & directory_path, const string &prefijo)c
     }
 
     //comprueba si directorio existe o no
-    std::filesystem::path filepath =directory_path;
+    std::filesystem::path filepath =path;
     bool filepathExists = std::filesystem::is_directory(filepath);
 
     //si no existe, lo crea
     if (!filepathExists){
-
         bool created_new_directory= std::filesystem::create_directory(filepath);
 
         //si no ha creado, escribe comentario y devuelve false
         if (!created_new_directory){
-            cout<<"No se puede crear el directorio "<<directory_path<<endl;
+            cout<<"No se puede crear el directorio "<<path<<endl;
             return false;
         }
         //si esta bien, escribe:
         else{
-            cout<<" Se ha creado el directorio "<< directory_path<<endl;
+            cout<<" Se ha creado el directorio "<< path<<endl;
         }
     }
 
@@ -159,12 +157,40 @@ bool Video::EscribirVideo(const string & directory_path, const string &prefijo)c
     for (int i = 0; i < this->seq.size(); i++){
         std::stringstream s_index;
         s_index << std::setw(3) << std::setfill('0') << i;
-        string image_path = directory_path + "/" + prefijo + s_index.str() + ".pgm";
-        if (!seq[i].Save(image_path.c_str())) {
+        string image_path = path + "/" + prefijo + s_index.str() + ".pgm";
+        if (!seq[i].Save(image_path.c_str())){
             return false;
         }
     }
 
     //resultado correcto
     return true;
+}
+
+void Video::Rebobinar (const Video &video)
+{
+    int contador=0;
+    for(int i=video.size()-1; i>=0; i--)
+    {
+        this->Insertar(contador, video[i]);
+        contador++;
+    }
+}
+
+void Video::Morphing(const Image&I1, const Image&I2, int nf)
+{
+    assert(I1.get_cols()==I2.get_cols() && I1.get_rows()==I2.get_rows());
+    Image fotograma(I1);
+    for(int a=0; a<nf; a++)
+    {
+        for(int i=0; i<I1.get_rows(); i++)
+        {
+            for(int j=0; j<I1.get_cols(); j++)
+            {
+                fotograma.set_pixel(i,j,I1.get_pixel(i,j)*(1-a/nf)+(I2.get_pixel(i,j)*a/nf));
+            }
+        }
+        this->Insertar(a,fotograma);
+
+    }
 }
