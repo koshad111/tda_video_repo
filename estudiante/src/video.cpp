@@ -107,12 +107,19 @@ bool Video::LeerVideo(const string &path){
     insertionSort(img_file_names, img_file_names.size(),
         [](string a, string b) { return a.compare(b)>0; });
 
+    for (const auto & img_file_name : img_file_names){
+        cout << path + img_file_name;
+    }
+
     //lee imagenes via constructor de Image con ruta a imagen como parametro
     for (const auto & img_file_name : img_file_names){
-        string path_to_image = path + "/" + img_file_name;
-        const char* to_image = path_to_image.c_str();
-        Image img = Image(to_image); //el constructor comprueba si el fichero es "correcto" o no
-        images.push_back(img);
+        size_t found = img_file_name.find("pgm");
+        if(img_file_name != "." && img_file_name != ".." && found == img_file_name.size()-3){
+            string path_to_image = path + img_file_name;
+            const char* to_image = path_to_image.c_str();
+            Image img = Image(to_image); //el constructor comprueba si el fichero es "correcto" o no
+            images.push_back(img);
+        }
     }
 
     //comprueba si el vector con imagenes esta vacio
