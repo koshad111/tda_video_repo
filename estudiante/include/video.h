@@ -1,3 +1,10 @@
+/**
+  * @file video.h
+  * @brief Fichero de cabecera asociado a la clase Video.a
+  *
+  * Implementación del TDA Video
+  */
+  
 #ifndef _VIDEO_H_
 #define _VIDEO_H_
 
