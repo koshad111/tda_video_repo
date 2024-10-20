@@ -11,8 +11,8 @@ using namespace std;
 
 int main (int argc, char ** argv) {
 
-  Image origen, destino;
-  Video morphing;
+  Image origen, destino;    //en video morphing la imagen "origen" va a cambiarse a la imagen "distino"
+  Video morphing;         //video de morphing que va a crearse
 
   if (argc != 5){
     cerr << endl << "Error: Número de parámetros incorrecto. " << endl;
@@ -20,6 +20,7 @@ int main (int argc, char ** argv) {
     exit (1);
   }
 
+  //conprueba si imagenes existen
   if (!origen.Load(argv[1])){
     cerr << "Error: " << argv[1] << " no es un fichero PGM válido" << endl;
     exit(1);
@@ -31,8 +32,13 @@ int main (int argc, char ** argv) {
     exit(1);
   }
 
+  //función morphing
   morphing.Morphing(origen, destino, stoi(argv[4]));
+
+  //guarda nuevo video morphing
   bool exito= morphing.EscribirVideo(argv[3], "morph");
+
+  //comprueba si esta guardado correctamente
   if(exito)
   {
     cout<<"Video morph creado"<<endl;

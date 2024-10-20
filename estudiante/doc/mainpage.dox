@@ -1,0 +1,137 @@
+/*! \mainpage Título de la página principal
+
+@image html doxyque.png "Pie de foto"
+
+# Información sobre Doxygen
+Doxygen admite el uso de la [sintaxis de Markdown (Consulta aquí los comandos básicos)](https://www.markdownguide.org/basic-syntax).
+
+Así como el uso de  <a href="https://htmlcheatsheet.com/">sintaxis <strong>HTML</strong></a>. Esto es especialmente útil
+para aquellos aspectos que Markdown no permite modificar, como el <span  style="color:red">color</span>. Aunque es buena idea evitarlo en la medida de lo posible, por dos
+motivos:
+
+1. <span style="font-size:1.1em">Hace el código <strong>poco</strong> <span style="  background-image: linear-gradient(to left, #4285f4, #34a853, #fbbc05, #ea4335); -webkit-background-clip: text; color: transparent;"> <strong> LEGIBLE </strong> </span></span>
+2. La idea detrás de Markdown es separar _aspecto_ y _contenido_. Y es una __gran idea__.
+
+
+Idealmente el aspecto debería resolverse mediante un documento ``.css`` configurado en el archivo ``Doxyfile.in``.
+Si te interesa, puedes echarle un vistazo a la [documentación](https://www.doxygen.nl/manual/customize.html) o a
+temas customizados como [este](https://jothepro.github.io/doxygen-awesome-css/). Aunque el tema por defecto nos parece
+perfecto, _CLÁSICO_. Así puedes centrarte en el contenido.
+
+Por último, lo hemos visto en clase y hay suficientes ejemplos en el código fuente proporcionado, pero puedes consultar la
+mayor parte de la sintaxis de Doxygen para comentar código en su
+[documentación](https://www.doxygen.nl/manual/docblocks.html).
+
+# Introducción
+
+En esta práctica tenуmos la tarea de completar completamente los archivos video.h y video.cpp, así como escribir por separado 
+el contenido de los archivos ejecutables rebobinar.cpp y morphing.cpp. El archivo video.h contiene una biblioteca, 
+es decir, los nombres y descripciones de los campos y los métodos básicos de la clase video como:
+
+- Un campo vector<Image> seq
+- constructor Video();
+- constructor Video(const Video & J);
+- constructor Video(int n);
+- destructor ~Video();
+- método int size() const;
+- método Image& operator[](int foto);
+- método const Image& operator[](int foto) const;
+- método void Insertar(int k, const Image&I);
+- método  void Borrar(int k);
+- método  bool LeerVideo(const string & directory_path);
+- método bool EscribirVideo(const string & directory_path, const string &prefijo) const;
+- método void Rebobinar(const Video &video);
+- método void Morphing(const Image &I1, const Image &I2, int nf);
+
+video.cpp contiene la implementación de los métodos y su descripción detallada
+
+# Ejecutables
+
+## Morphing
+
+ El morphing se usa para cambiar una imagen en otra o para proporcionar una transición suave de
+ una imagen a otra creando la ilusión de una transformación. El término está tomado de la industria
+ de los efectos especiales. Una forma de hacer un morphing simple es establecer un proceso para
+ incrementar o decrementar los valores de los píxeles a partir de una imagen fuente hasta que igualen
+ los valores de los correspondientes pixeles en una imagen destino.
+ 
+ codigo del fichro ejecutable:
+
+ /*!  A  test 5435 test class. 
+ /*!
+ * A more elaborate class description.
+ 
+ 
+class QTstyle_Test
+{
+  public:
+ 
+    //! An enum.
+    /*! More detailed enum description. */
+    enum TEnum { 
+                 TVal1, /*!< Enum value TVal1. */  
+                 TVal2, /*!< Enum value TVal2. */  
+                 TVal3  /*!< Enum value TVal3. */  
+               } 
+         //! Enum pointer.
+         /*! Details. */
+         *enumPtr, 
+         //! Enum variable.
+         /*! Details. */
+         enumVar;  
+    
+    //! A constructor.
+    /*!
+      A more elaborate description of the constructor.
+    */
+    QTstyle_Test();
+ 
+    //! A destructor.
+    /*!
+      A more elaborate description of the destructor.
+    */
+   ~QTstyle_Test();
+    
+    //! A normal member taking two arguments and returning an integer value.
+    /*!
+      \param a an integer argument.
+      \param s a constant character pointer.
+      \return The test results
+      \sa QTstyle_Test(), ~QTstyle_Test(), testMeToo() and publicVar()
+    */
+    int testMe(int a,const char *s);
+       
+    //! A pure virtual member.
+    /*!
+      \sa testMe()
+      \param c1 the first argument.
+      \param c2 the second argument.
+    */
+    virtual void testMeToo(char c1,char c2) = 0;
+   
+    //! A public variable.
+    /*!
+      Details.
+    */
+    int publicVar;
+       
+    //! A function variable.
+    /*!
+      Details.
+    */
+    int (*handler)(int a,int b);
+};
+
+
+@image html invert.png
+## Negativo:
+
+Calcula el negativo de una imagen
+
+> __negativo__ \<FichImagenOriginal\> \<FichImagenDestino\>
+@param "<FichImagenOriginal>" Imagen PGM a la que se va a calcular
+@param <FichImagenDestino> Imagen PGM resultado de calcular el negativo
+
+
+
+*/

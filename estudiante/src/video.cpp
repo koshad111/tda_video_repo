@@ -3,11 +3,11 @@
 #include <iostream>
 #include <fstream>
 #include <regex>
-#include <dirent.h>  // Para opendir y trabajo con catalogos
+#include <dirent.h>
 #include <filesystem>
 
 #include <image.h>
-#include <imageIO.h>        //parece que no hace falta
+#include <imageIO.h>
 #include <video.h>
 
 using namespace std;
@@ -49,14 +49,14 @@ const Image & Video::operator[](int foto) const
 
 void Video::Insertar(int k, const Image&I)
 {
-    assert(k>=0 && k<=seq.size()); //SE PUEDE EN SEQ.SIZE?? no
+    assert(k>=0 && k<=seq.size());
     seq.insert(seq.begin()+k, I);
 }
 
 void Video::Borrar(int k)
 {
     assert(k>=0 && k<seq.size());
-    seq.erase(seq.begin()+k);       //no estoy segura que se hace seq.begin()+k
+    seq.erase(seq.begin()+k);
 }
 
 //ordena los nombres de imagenes de menor a mayor, para insertar al vector seq
@@ -81,19 +81,18 @@ void readDirectory(const std::string& name, vector<string>& v)
     DIR* dirp = opendir(name.c_str());
     struct dirent * dp;
     while ((dp = readdir(dirp)) != NULL) {
-
+        //agrega los nombres de las imágenes al vector dado
         v.push_back(dp->d_name);
 
     }
     closedir(dirp);
 }
 
-//maybe add to video load results
 
 bool Video::LeerVideo(const string &path){
 
-    vector<Image> images;
-    vector<string> img_file_names;
+    vector<Image> images;               //un vector de prueba con imágenes que se agregarán a medida que se lean
+    vector<string> img_file_names;      //un vector con los nombres de las imágenes, que se leerán desde una carpeta mediante el método readDirectory
 
     //lee directorio y aniade nombres de las imagenes al img_file_names
     readDirectory(path, img_file_names);
@@ -107,24 +106,27 @@ bool Video::LeerVideo(const string &path){
     insertionSort(img_file_names, img_file_names.size(),
         [](string a, string b) { return a.compare(b)>0; });
 
+    //comprueba cuales nombres han agregado al vector con nombres
     for (const auto & img_file_name : img_file_names){
         cout << path + img_file_name;
     }
 
     //lee imagenes via constructor de Image con ruta a imagen como parametro
     for (const auto & img_file_name : img_file_names){
+        //busca la posicion de cadena "pgm" para comprobar los nombres
         size_t found = img_file_name.find("pgm");
+        //trabaja con imagenes
         if(img_file_name != "." && img_file_name != ".." && found == img_file_name.size()-3){
-            string path_to_image = path + img_file_name;
+            string path_to_image = path + img_file_name;    //ruta a una imagen
             const char* to_image = path_to_image.c_str();
             Image img = Image(to_image); //el constructor comprueba si el fichero es "correcto" o no
-            images.push_back(img);
+            images.push_back(img);  //agrega una imagen al vector con imagenes
         }
     }
 
     //comprueba si el vector con imagenes esta vacio
     if (images.empty()) {
-        return false;
+        return false;   //si esta vaio, devuelve false
     }
 
     //guarda imagenes a seq
@@ -133,6 +135,7 @@ bool Video::LeerVideo(const string &path){
     //resultado correcto
     return true;
 }
+
 
 bool Video::EscribirVideo(const string & path, const string &prefijo)const{
 
@@ -162,8 +165,8 @@ bool Video::EscribirVideo(const string & path, const string &prefijo)const{
 
     //guarda imagenes al directorio con nombre, que esta compuesto de prefijo y index de imagen
     for (int i = 0; i < this->seq.size(); i++){
-        std::stringstream s_index;
-        s_index << std::setw(3) << std::setfill('0') << i;
+        stringstream s_index;
+        s_index << setw(3) << setfill('0') << i;
         string image_path = path + "/" + prefijo + s_index.str() + ".pgm";
         if (!seq[i].Save(image_path.c_str())){
             return false;
@@ -174,6 +177,7 @@ bool Video::EscribirVideo(const string & path, const string &prefijo)const{
     return true;
 }
 
+//hay que esctibir comentarios
 void Video::Rebobinar (const Video &video)
 {
     int contador=0;

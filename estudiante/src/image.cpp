@@ -16,6 +16,7 @@ using namespace std;
 /********************************
       FUNCIONES PRIVADAS
 ********************************/
+//para campiar c++14 a c++17, tenia que cambiar 'byte' a 'pixel'
 void Image::Allocate(int nrows, int ncols, pixel * buffer){
     rows = nrows;
     cols = ncols;

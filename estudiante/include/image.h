@@ -13,6 +13,7 @@
 #include "imageIO.h"
 
 
+//para cambiar c++14 a c++17, tenia que cambiar 'byte' a 'pixel'
 /*! unsigned char aliased as pixel*/
 typedef unsigned char pixel;
 
