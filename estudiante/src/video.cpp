@@ -159,7 +159,7 @@ bool Video::EscribirVideo(const string & path, const string &prefijo)const{
         }
         //si esta bien, escribe:
         else{
-            cout<<" Se ha creado el directorio "<< path<<endl;
+            cout<<"Se ha creado el directorio "<< path<<endl;
         }
     }
 
@@ -177,31 +177,29 @@ bool Video::EscribirVideo(const string & path, const string &prefijo)const{
     return true;
 }
 
-//hay que esctibir comentarios
 void Video::Rebobinar (const Video &video)
 {
     int contador=0;
     for(int i=video.size()-1; i>=0; i--)
     {
-        this->Insertar(contador, video[i]);
-        contador++;
+        this->Insertar(contador, video[i]); //Va añadiendo imagenes en el objeto video en el orden inverso del de entrada
+        contador++; //Posición donde se va almacenando cada imagen
     }
 }
 
 void Video::Morphing(const Image&I1, const Image&I2, int nf)
 {
-    assert(I1.get_cols()==I2.get_cols() && I1.get_rows()==I2.get_rows());
-    Image fotograma(I1);
+    assert(I1.get_cols()==I2.get_cols() && I1.get_rows()==I2.get_rows()); //Asegura que las dos imagenes tienen el mismo tamaño
+    Image fotograma(I1); //Inicializa una imagen copiando la de entrada, que será la que se irá modificando y añadiendo
     for(int a=0; a<nf; a++)
     {
         for(int i=0; i<I1.get_rows(); i++)
         {
-            for(int j=0; j<I1.get_cols(); j++)
-            {
-                fotograma.set_pixel(i,j,I1.get_pixel(i,j)*(1-a/nf)+(I2.get_pixel(i,j)*a/nf));
+            for(int j=0; j<I1.get_cols(); j++){
+                fotograma.set_pixel(i,j,((I1.get_pixel(i,j)*(1-((double)a/(double)nf)))+((double)(I2.get_pixel(i,j)*a)/(double)nf))); //a añadiendo pixel a pixel por cada foto
             }
         }
-        this->Insertar(a,fotograma);
+        this->Insertar(a,fotograma); //Una vez generada la foto a-ésima se inserta en el video
 
     }
 }

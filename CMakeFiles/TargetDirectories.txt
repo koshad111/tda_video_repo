@@ -1,0 +1,6 @@
+/home/daria/tda_video/CMakeFiles/video.dir
+/home/daria/tda_video/CMakeFiles/rebobinar.dir
+/home/daria/tda_video/CMakeFiles/morphing.dir
+/home/daria/tda_video/CMakeFiles/doc_doxygen.dir
+/home/daria/tda_video/CMakeFiles/edit_cache.dir
+/home/daria/tda_video/CMakeFiles/rebuild_cache.dir

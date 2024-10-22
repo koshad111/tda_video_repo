@@ -49,6 +49,8 @@ video.cpp contiene la implementación de los métodos y su descripción detallad
 
 # Ejecutables
 
+@image html morphing.png "vide-morphing de vacas.pgm a shuffle_9973.pgm"
+
 ## Morphing:
 
  El morphing se usa para cambiar una imagen en otra o para proporcionar una transición suave de
@@ -57,6 +59,10 @@ video.cpp contiene la implementación de los métodos y su descripción detallad
  incrementar o decrementar los valores de los píxeles a partir de una imagen fuente hasta que igualen
  los valores de los correspondientes pixeles en una imagen destino.
  
+
+@image html before.png "Antes de rebobinar"
+@image html after.png "despues de rebobinar"
+
 ## Rebobinar:
 
  A partir de un vídeo, obtenga el vídeo invertido. Esta función tiene como parámetro de entrada un vídeo constante

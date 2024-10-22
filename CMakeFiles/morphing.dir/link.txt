@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/morphing.dir/estudiante/src/morphing.cpp.o -o morphing  libvideo.a 
